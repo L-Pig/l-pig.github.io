@@ -64,7 +64,7 @@ a[data-astro-cid-tibg2hfl]{text-decoration:none;color:inherit}a[data-astro-cid-t
 <blockquote>
 <p>GMP 是 Go 语言的调度模型，是 Go 语言的并发模型。</p>
 </blockquote>
-<p><img src="/public/assets/uploads/gmp-model.png" alt="gmp-model.png"></p>
+<p><img src="/assets/uploads/gmp-model.png" alt="gmp-model.png"></p>
 <p>源码：<a href="https://github.com/golang/go/blob/master/src/runtime/runtime2.go" rel="nofollow noopener noreferrer" target="_blank">GMP</a></p>
 <h2 id="二gmp-模型">二、GMP 模型</h2>
 <blockquote>
@@ -224,7 +224,7 @@ M，就会创建新的 M。</li>
 10ms，防止其他协程被饿死。</li>
 </ul>
 <h3 id="调度器的生命周期">调度器的生命周期</h3>
-<p><img src="/src/assets/uploads/go-schedule-life.png" alt="go-schedule-life.png"></p>
+<p><img src="/public/assets/uploads/go-schedule-life.png" alt="go-schedule-life.png"></p>
 <h4 id="m0-和-g0">M0 和 G0</h4>
 <ul>
 <li>M0 是 程序启动后编号为0的主线程，这个 M 对应的实例会在全局变量 runtime.m0(定义在 proc.go 的 m0) 中，M0 负责执行初始化操作和启动第一个
