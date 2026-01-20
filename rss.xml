@@ -5,13 +5,24 @@
     <description>一个不会写代码的非专业摄影师</description>
     <link>https://blog.l-pig.cn/</link>
     <atom:link href="https://blog.l-pig.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 13 Jan 2026 00:00:00 GMT</lastBuildDate>
-    <pubDate>Tue, 13 Jan 2026 00:00:00 GMT</pubDate>
+    <lastBuildDate>Tue, 20 Jan 2026 00:00:00 GMT</lastBuildDate>
+    <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
     <language>zh-cn</language>
     <managingEditor>L-Pig</managingEditor>
     <webMaster>L-Pig</webMaster>
     <generator>Astro</generator>
     <ttl>60</ttl>
+
+    <item>
+      <title>Golang 编译优化-减少体积</title>
+      <link>https://blog.l-pig.cn/blog/go-compile-optimized-1/</link>
+      <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-compile-optimized-1/</guid>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
+      <author>L-Pig</author>
+      <description>Golang 编译优化-减少体积</description>
+      <enclosure url="https://blog.l-pig.cn/_astro/image.a7r95W2O.png" type="image/jpeg" />
+      <category>Golang</category>
+    </item>
 
     <item>
       <title>tmux 终端</title>
@@ -43,17 +54,6 @@
       <author>L-Pig</author>
       <description>Golang GMP调度模型流程</description>
       <enclosure url="https://blog.l-pig.cn/_astro/golang.BpeTWk16.png" type="image/jpeg" />
-      <category>Golang</category>
-    </item>
-
-    <item>
-      <title>Golang 编译优化-减少体积</title>
-      <link>https://blog.l-pig.cn/blog/go-compile-optimized-1/</link>
-      <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-compile-optimized-1/</guid>
-      <pubDate>Thu, 08 Jan 2026 00:00:00 GMT</pubDate>
-      <author>L-Pig</author>
-      <description>Golang 编译优化-减少体积</description>
-      <enclosure url="https://blog.l-pig.cn/_astro/image.a7r95W2O.png" type="image/jpeg" />
       <category>Golang</category>
     </item>
 
@@ -105,7 +105,7 @@
       <title>博客</title>
       <link>https://blog.l-pig.cn/blog/-index/</link>
       <guid isPermaLink="true">https://blog.l-pig.cn/blog/-index/</guid>
-      <pubDate>Tue, 20 Jan 2026 10:02:00 GMT</pubDate>
+      <pubDate>Tue, 20 Jan 2026 10:05:09 GMT</pubDate>
       <author>L-Pig</author>
       <description>记录 L-Pig 写的文章</description>
       
