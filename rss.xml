@@ -47,6 +47,17 @@
     </item>
 
     <item>
+      <title>Golang 编译优化-减少体积</title>
+      <link>https://blog.l-pig.cn/blog/go-compile-optimized-1/</link>
+      <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-compile-optimized-1/</guid>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 GMT</pubDate>
+      <author>L-Pig</author>
+      <description>Golang 编译优化-减少体积</description>
+      <enclosure url="https://blog.l-pig.cn/_astro/image.a7r95W2O.png" type="image/jpeg" />
+      <category>Golang</category>
+    </item>
+
+    <item>
       <title>Go常用库</title>
       <link>https://blog.l-pig.cn/blog/go-lib/</link>
       <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-lib/</guid>
@@ -94,7 +105,7 @@
       <title>博客</title>
       <link>https://blog.l-pig.cn/blog/-index/</link>
       <guid isPermaLink="true">https://blog.l-pig.cn/blog/-index/</guid>
-      <pubDate>Tue, 13 Jan 2026 10:56:19 GMT</pubDate>
+      <pubDate>Tue, 20 Jan 2026 10:02:00 GMT</pubDate>
       <author>L-Pig</author>
       <description>记录 L-Pig 写的文章</description>
       
