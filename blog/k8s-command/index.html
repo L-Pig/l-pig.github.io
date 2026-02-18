@@ -286,7 +286,151 @@ a[data-astro-cid-tibg2hfl]{text-decoration:none;color:inherit}a[data-astro-cid-t
 
 
 
-<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl get nodes</code></td><td>列出集群中所有的节点。</td></tr><tr><td><code>kubectl describe node &#x3C;节点名称></code></td><td>查看节点的详细信息，包括其上的Pod列表。</td></tr><tr><td><code>kubectl cordon &#x3C;节点名称></code></td><td>将节点标记为不可调度，新的Pod不会被调度到该节点上。</td></tr><tr><td><code>kubectl uncordon &#x3C;节点名称></code></td><td>取消节点的不可调度标记。</td></tr><tr><td><code>kubectl drain &#x3C;节点名称></code></td><td>安全地驱逐节点上的所有Pod，通常用于节点维护。</td></tr></tbody></table>  </div> </div></div></section> <!-- 文章信息区 --> <!-- 文章底部信息卡片 --> <div class="relative mt-16"> <!-- 作者头像 - 超出顶部 --> <div class="left_centor -top-12 transform -translate-x-1/2 z-10 animate-fadeUp"> <div class="relative group"> <div class="absolute -inset-2 bg-gradient-to-r from-orange-500 via-indigo-500 to-green-500 rounded-[35px] blur opacity-40 group-hover:opacity-60 transition duration-300"></div> <img src="/_astro/picture.Cm-b1VQQ_Z1d7foG.webp" alt="L-Pig" loading="lazy" decoding="async" fetchpriority="auto" width="80" height="80" class="relative w-20 h-20 rounded-full border-4 border-white/50 shadow-2xl transform group-hover:scale-105 transition-all duration-300 bg-white/10 backdrop-blur-sm"> </div> </div> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock rounded-2xl pt-16 pb-8 px-8"><div class="liquidGlass-effect-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-text intersect-no-queue intersect:animate-fadeUp transition-all duration-300 fast-slow">  <div class="text-center m-6"> <div class="font-bold text-2xl text-txt-p dark:text-darkmode-txt-p mb-1"> L-Pig </div> <!-- <div class="text-sm text-txt-s dark:text-darkmode-txt-s opacity-80">
+<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl get nodes</code></td><td>列出集群中所有的节点。</td></tr><tr><td><code>kubectl describe node &#x3C;节点名称></code></td><td>查看节点的详细信息，包括其上的Pod列表。</td></tr><tr><td><code>kubectl cordon &#x3C;节点名称></code></td><td>将节点标记为不可调度，新的Pod不会被调度到该节点上。</td></tr><tr><td><code>kubectl uncordon &#x3C;节点名称></code></td><td>取消节点的不可调度标记。</td></tr><tr><td><code>kubectl drain &#x3C;节点名称></code></td><td>安全地驱逐节点上的所有Pod，通常用于节点维护好的，除了上一回答中提到的基础命令，<code>kubectl</code> 还提供了许多高级和专门的命令，可以进一步提升您在管理和排查 Kubernetes 集群时的效率。以下是更详尽的补充命令和技巧：</td></tr></tbody></table>
+<h2 id="七高级调试与诊断-advanced-debugging--diagnostics">七、高级调试与诊断 (Advanced Debugging &#x26; Diagnostics)</h2>
+<p>当 <code>logs</code> 和 <code>describe</code> 不足以解决问题时，这些命令能提供更深层次的洞察。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl get events --sort-by='.lastTimestamp'</code></td><td>查看当前命名空间中所有资源相关的事件，并按最新时间排序。这对于诊断 Pod 启动失败、镜像拉取错误等问题至关重要。</td></tr><tr><td><code>kubectl port-forward &#x3C;Pod或Service名称> &#x3C;本地端口>:&#x3C;目标端口></code></td><td>将本地端口的流量转发到 Pod 或 Service 的指定端口，便于在本地直接访问和调试集群内部的应用。</td></tr><tr><td><code>kubectl debug &#x3C;Pod名称> -it --image=&#x3C;调试工具镜像></code></td><td>(较新版本) 启动一个临时的 “ephemeral container” 附加到正在运行的 Pod 中，可以让你在不重启 Pod 的情况下加入调试工具（如 <code>net-tools</code>, <code>curl</code> 等）。</td></tr><tr><td><code>kubectl debug node/&#x3C;节点名称> -it --image=&#x3C;镜像></code></td><td>在指定节点上创建一个可访问该节点文件系统和命名空间的特权 Pod，用于低级别的节点问题排查。</td></tr><tr><td><code>kubectl cp &#x3C;本地路径> &#x3C;Pod名称>:&#x3C;Pod内路径></code></td><td>在本地文件系统和 Pod 内的容器之间复制文件，方便上传配置文件或下载日志、dump 文件。</td></tr><tr><td><code>kubectl auth can-i &#x3C;动词> &#x3C;资源类型> [--namespace &#x3C;命名空间>]</code></td><td>检查当前用户是否具有执行特定操作的权限，是排查 RBAC 权限问题的利器。</td></tr></tbody></table>
+<h2 id="八高效输出与查询-efficient-output--querying">八、高效输出与查询 (Efficient Output &#x26; Querying)</h2>
+<p><code>kubectl get</code> 的默认输出格式有限，通过自定义输出可以精确获取所需信息。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl get &#x3C;资源> -o jsonpath='{.spec.containers[0].image}'</code></td><td>使用 JSONPath 表达式从返回的 JSON 对象中提取特定字段的值，非常适合脚本自动化。</td></tr><tr><td><code>kubectl get pods -o custom-columns=名称:.metadata.name,IP:.status.podIP</code></td><td>自定义输出的列，可以清晰地展示你最关心的信息。</td></tr><tr><td><code>kubectl get pods --field-selector status.phase=Running</code></td><td>根据资源的字段值（而非标签）来过滤资源。例如，只显示处于 “Running” 状态的 Pod。</td></tr><tr><td><code>kubectl get pods -l app=my-app</code></td><td>使用标签选择器 (label selector) 过滤资源，这是 Kubernetes 中资源分组和筛选的核心机制。</td></tr><tr><td><code>kubectl get pods -A</code> 或 <code>kubectl get pods --all-namespaces</code></td><td>列出所有命名空间下的 Pod，适用于全局视角查看资源。</td></tr></tbody></table>
+<h2 id="九多集群与配置管理-multi-cluster--configuration-management">九、多集群与配置管理 (Multi-Cluster &#x26; Configuration Management)</h2>
+<p>对于需要操作多个 Kubernetes 集群的用户，上下文管理至关重要。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl config get-contexts</code></td><td>列出 <code>kubeconfig</code> 文件中定义的所有上下文（集群、用户和命名空间的组合）。</td></tr><tr><td><code>kubectl config current-context</code></td><td>显示当前的活动上下文。</td></tr><tr><td><code>kubectl config use-context &#x3C;上下文名称></code></td><td>切换到指定的上下文，后续所有 <code>kubectl</code> 命令都将针对该上下文执行。</td></tr><tr><td><code>kubectl config set-context &#x3C;上下文名称> --namespace=&#x3C;命名空间></code></td><td>修改指定上下文的默认命名空间。</td></tr></tbody></table>
+<h2 id="十资源修改与维护-resource-modification--maintenance">十、资源修改与维护 (Resource Modification &#x26; Maintenance)</h2>
+<p>除了 <code>apply</code> 和 <code>edit</code>，还有其他方式可以对线上资源进行精细操作。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl patch &#x3C;资源类型> &#x3C;资源名称> -p '{"spec":{"replicas":3}}'</code></td><td>在不打开编辑器的情况下，直接对线上资源进行局部更新。</td></tr><tr><td><code>kubectl label &#x3C;资源类型> &#x3C;资源名称> &#x3C;标签名>=&#x3C;标签值></code></td><td>为资源添加或更新标签。</td></tr><tr><td><code>kubectl annotate &#x3C;资源类型> &#x3C;资源名称> &#x3C;注解名>=&#x3C;注解值></code></td><td>为资源添加或更新注解。</td></tr><tr><td><code>kubectl taint nodes &#x3C;节点名称> &#x3C;键>=&#x3C;值>:&#x3C;效果></code></td><td>为节点添加污点 (Taint)，可以阻止某些 Pod 被调度到该节点上，常用于节点维护。</td></tr></tbody></table>
+<h2 id="十一效率技巧-productivity-tips">十一、效率技巧 (Productivity Tips)</h2>
+<p>这些并非命令，但却是极大提升 <code>kubectl</code> 使用体验的最佳实践。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>技巧</th><th>解释</th></tr></thead><tbody><tr><td><code>kubectl explain &#x3C;资源类型>[.字段]</code></td><td>显示关于特定资源及其字段的详细文档。例如，<code>kubectl explain pod.spec.containers</code> 会解释容器的 spec 包含哪些字段。</td></tr><tr><td><code>kubectl create &#x3C;资源> --dry-run=client -o yaml</code></td><td>不实际创建资源，而是生成对应的 YAML 文件输出到标准输出。这是学习和编写 YAML 配置文件的绝佳方式。</td></tr></tbody></table>  </div> </div></div></section> <!-- 文章信息区 --> <!-- 文章底部信息卡片 --> <div class="relative mt-16"> <!-- 作者头像 - 超出顶部 --> <div class="left_centor -top-12 transform -translate-x-1/2 z-10 animate-fadeUp"> <div class="relative group"> <div class="absolute -inset-2 bg-gradient-to-r from-orange-500 via-indigo-500 to-green-500 rounded-[35px] blur opacity-40 group-hover:opacity-60 transition duration-300"></div> <img src="/_astro/picture.Cm-b1VQQ_Z1d7foG.webp" alt="L-Pig" loading="lazy" decoding="async" fetchpriority="auto" width="80" height="80" class="relative w-20 h-20 rounded-full border-4 border-white/50 shadow-2xl transform group-hover:scale-105 transition-all duration-300 bg-white/10 backdrop-blur-sm"> </div> </div> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock rounded-2xl pt-16 pb-8 px-8"><div class="liquidGlass-effect-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-text intersect-no-queue intersect:animate-fadeUp transition-all duration-300 fast-slow">  <div class="text-center m-6"> <div class="font-bold text-2xl text-txt-p dark:text-darkmode-txt-p mb-1"> L-Pig </div> <!-- <div class="text-sm text-txt-s dark:text-darkmode-txt-s opacity-80">
                 文章作者
               </div> --> </div>  <div class="flex items-center justify-center gap-4 mb-2"> <button id="share-btn" type="button" class="glass-button glass-button--secondary glass-button--md select-none min-w-24 justify-center " title="分享" data-astro-cid-qerq4hxv="true" data-astro-cid-xwnkcw7l style="--variantBase: rgba(59, 130, 246, 0.25);--variantHover: rgba(59, 130, 246, 0.35);--variantBorder: rgba(71, 158, 255, 0.4);--variantHoverBorder: rgba(73, 158, 254, 0.6);--variantColor: #2563eb;--variantHoverColor: #3b82f6;--variantShadow: rgba(37, 99, 235, 0.25);--variantGradient: rgba(255, 255, 255, 0.3);--sizePadding: 0.75rem 1rem;--sizeFontSize: 1rem;--sizeIconSize: 1rem;--sizeGap: 0.5rem;--sizeBorderRadius: 999px;">  <span class="glass-button__icon" data-astro-cid-xwnkcw7l style="--variantBase: rgba(59, 130, 246, 0.25);--variantHover: rgba(59, 130, 246, 0.35);--variantBorder: rgba(71, 158, 255, 0.4);--variantHoverBorder: rgba(73, 158, 254, 0.6);--variantColor: #2563eb;--variantHoverColor: #3b82f6;--variantShadow: rgba(37, 99, 235, 0.25);--variantGradient: rgba(255, 255, 255, 0.3);--sizePadding: 0.75rem 1rem;--sizeFontSize: 1rem;--sizeIconSize: 1rem;--sizeGap: 0.5rem;--sizeBorderRadius: 999px;"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
@@ -442,7 +586,7 @@ CC BY-NC-SA 4.0
     }
     loadTwikoo();
   });
-})();</script> </div></div></div> </article> </div> <!--sidebar --> <div class="flex-col h-full sticky top-[4rem] ml-4 space-y-4 hidden lg:flex lg:w-1/4 xl:w-1/5"> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock !p-6"><div class="liquidGlass-effect-h  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-text  intersect:animate-fadeLeft transition-all duration-300 fast-slow"><div class="intersect:animate-fadeLeft" data-astro-cid-hop3l3kc><h2 class="text-2xl border-none mb-3" data-astro-cid-hop3l3kc>内容导航</h2><div class="max-h-96 overflow-y-auto" data-astro-cid-hop3l3kc><ul class="list-none m-0 space-y-1" data-astro-cid-hop3l3kc><li class="ml-0" data-astro-cid-hop3l3kc><a href="#一集群信息与配置" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>一、集群信息与配置</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#二资源管理查看与检索-get--describe" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>二、资源管理：查看与检索 (Get &amp; Describe)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#三资源管理创建更新与删除-create-apply-delete" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>三、资源管理：创建、更新与删除 (Create, Apply, Delete)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#四应用部署与伸缩-deployment--scaling" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>四、应用部署与伸缩 (Deployment &amp; Scaling)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#五故障排查与调试-troubleshooting--debugging" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>五、故障排查与调试 (Troubleshooting &amp; Debugging)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#六节点管理-node-management" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>六、节点管理 (Node Management)</a></li></ul></div></div></div></div></div><script type="module">function u(){const t=document.querySelector("header");if(t){const e=t.offsetHeight;return console.log("Header height:",e),e+32}return 140}function g(){document.querySelectorAll("[data-toc-link]").forEach(e=>{const n=e.cloneNode(!0);e.parentNode?.replaceChild(n,e),n.addEventListener("click",function(r){r.preventDefault();const c=r.currentTarget.getAttribute("href");if(!c)return;const l=c.substring(1),o=document.getElementById(l);if(o){const s=o.getBoundingClientRect(),a=window.pageYOffset||document.documentElement.scrollTop,d=u(),i=a+s.top-d;console.log("Target element:",o),console.log("Element rect.top:",s.top),console.log("Current scroll top:",a),console.log("Header height:",d),console.log("Target scroll position:",i),window.scrollTo({top:Math.max(0,i),behavior:"smooth"}),history.pushState(null,"",`#${l}`)}})})}document.addEventListener("DOMContentLoaded",g);document.addEventListener("astro:page-load",g);</script> <!-- 推荐阅读模块 --> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock rounded-[25px] overflow-hidden mb-3"><div class="liquidGlass-effect-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-text intersect-no-queue intersect:animate-fadeUp transition-all duration-300 fast-slow"> <div class="py-2"> <div class="flex items-center justify-between mb-4"> <h3 class="text-lg font-bold text-txt-p dark:text-darkmode-txt-p flex items-center gap-2"> <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path> </svg>
+})();</script> </div></div></div> </article> </div> <!--sidebar --> <div class="flex-col h-full sticky top-[4rem] ml-4 space-y-4 hidden lg:flex lg:w-1/4 xl:w-1/5"> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock !p-6"><div class="liquidGlass-effect-h  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeLeft transition-all duration-300 fast-slow"></div><div class="liquidGlass-text  intersect:animate-fadeLeft transition-all duration-300 fast-slow"><div class="intersect:animate-fadeLeft" data-astro-cid-hop3l3kc><h2 class="text-2xl border-none mb-3" data-astro-cid-hop3l3kc>内容导航</h2><div class="max-h-96 overflow-y-auto" data-astro-cid-hop3l3kc><ul class="list-none m-0 space-y-1" data-astro-cid-hop3l3kc><li class="ml-0" data-astro-cid-hop3l3kc><a href="#一集群信息与配置" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>一、集群信息与配置</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#二资源管理查看与检索-get--describe" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>二、资源管理：查看与检索 (Get &amp; Describe)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#三资源管理创建更新与删除-create-apply-delete" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>三、资源管理：创建、更新与删除 (Create, Apply, Delete)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#四应用部署与伸缩-deployment--scaling" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>四、应用部署与伸缩 (Deployment &amp; Scaling)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#五故障排查与调试-troubleshooting--debugging" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>五、故障排查与调试 (Troubleshooting &amp; Debugging)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#六节点管理-node-management" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>六、节点管理 (Node Management)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#七高级调试与诊断-advanced-debugging--diagnostics" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>七、高级调试与诊断 (Advanced Debugging &amp; Diagnostics)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#八高效输出与查询-efficient-output--querying" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>八、高效输出与查询 (Efficient Output &amp; Querying)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#九多集群与配置管理-multi-cluster--configuration-management" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>九、多集群与配置管理 (Multi-Cluster &amp; Configuration Management)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#十资源修改与维护-resource-modification--maintenance" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>十、资源修改与维护 (Resource Modification &amp; Maintenance)</a></li><li class="ml-0" data-astro-cid-hop3l3kc><a href="#十一效率技巧-productivity-tips" class="block w-full leading-relaxed no-underline hover:text-primary transition-colors duration-200 py-1" data-toc-link data-astro-cid-hop3l3kc>十一、效率技巧 (Productivity Tips)</a></li></ul></div></div></div></div></div><script type="module">function u(){const t=document.querySelector("header");if(t){const e=t.offsetHeight;return console.log("Header height:",e),e+32}return 140}function g(){document.querySelectorAll("[data-toc-link]").forEach(e=>{const n=e.cloneNode(!0);e.parentNode?.replaceChild(n,e),n.addEventListener("click",function(r){r.preventDefault();const c=r.currentTarget.getAttribute("href");if(!c)return;const l=c.substring(1),o=document.getElementById(l);if(o){const s=o.getBoundingClientRect(),a=window.pageYOffset||document.documentElement.scrollTop,d=u(),i=a+s.top-d;console.log("Target element:",o),console.log("Element rect.top:",s.top),console.log("Current scroll top:",a),console.log("Header height:",d),console.log("Target scroll position:",i),window.scrollTo({top:Math.max(0,i),behavior:"smooth"}),history.pushState(null,"",`#${l}`)}})})}document.addEventListener("DOMContentLoaded",g);document.addEventListener("astro:page-load",g);</script> <!-- 推荐阅读模块 --> <div class="liquid-glass-container "><div class="liquidGlass-wrapper dock rounded-[25px] overflow-hidden mb-3"><div class="liquidGlass-effect-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-tint-h  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-shine  intersect:animate-fadeUp transition-all duration-300 fast-slow"></div><div class="liquidGlass-text intersect-no-queue intersect:animate-fadeUp transition-all duration-300 fast-slow"> <div class="py-2"> <div class="flex items-center justify-between mb-4"> <h3 class="text-lg font-bold text-txt-p dark:text-darkmode-txt-p flex items-center gap-2"> <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path> </svg>
 推荐阅读
 </h3> </div> <div class="space-y-1"> <div class="intersect:animate-fadeUp" style="animation-delay: 0ms"> <div class="group flex p-2 pr-4 items-center gap-3 rounded-[25px] text-txt-p
    hover:bg-orange-500 dark:hover:bg-orange-500 transition-all duration-300 
@@ -467,7 +611,7 @@ blog.l-pig.cn ·
 ·
 <span>13 文章</span>
 ·
-<span>全站 14.7K 字</span>
+<span>全站 15.6K 字</span>
 ·
 <span>运行 221 天</span> </div> </div> </div> </div> </div> </div></div></nav> </div> </div> </footer> <!-- Footer 滚动控制脚本 --> <script type="module">function c(){const t=document.getElementById("main-footer"),n=document.getElementById("footer-collapsed"),e=document.getElementById("footer-expanded");if(!t||!n||!e)return;let o=!1;function i(){const r=window.pageYOffset||document.documentElement.scrollTop,u=window.innerHeight,p=document.documentElement.scrollHeight,d=r+u>=p-50;d&&!o&&e?(e.style.opacity="1",e.style.maxHeight="200px",o=!0):!d&&o&&e&&(e.style.opacity="0",e.style.maxHeight="0",o=!1)}let l=!1;function s(){l||(requestAnimationFrame(()=>{i(),l=!1}),l=!0)}window.addEventListener("scroll",s,{passive:!0}),i()}function a(){const t=document.getElementById("back-to-top-footer");if(!t)return;t.style.padding="0";let n=!1;t.addEventListener("click",l=>{l.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})});function e(){if(!t)return;const s=(window.pageYOffset||document.documentElement.scrollTop)>300;s&&!n?(t.style.width="auto",t.style.opacity="1",t.style.padding="0.6rem",t.style.display="visible",t.style.pointerEvents="auto",n=!0):!s&&n&&(t.style.width="0",t.style.opacity="0",t.style.padding="0",t.style.display="hidden",t.style.pointerEvents="none",n=!1)}let o=!1;function i(){o||(requestAnimationFrame(()=>{e(),o=!1}),o=!0)}window.addEventListener("scroll",i,{passive:!0}),e()}document.addEventListener("DOMContentLoaded",()=>{c(),a()});document.addEventListener("astro:page-load",()=>{c(),a()});</script> <script type="module">function c(){document.querySelectorAll("pre").forEach(o=>{if(o.querySelector(".copy-code-btn"))return;o.style.position="relative";const e=document.createElement("button");e.className="copy-code-btn",e.innerHTML=`
         <span class="copy-icon">
