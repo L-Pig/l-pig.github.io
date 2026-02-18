@@ -102,17 +102,6 @@
     </item>
 
     <item>
-      <title>Go实现枚举</title>
-      <link>https://blog.l-pig.cn/blog/go-enum/</link>
-      <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-enum/</guid>
-      <pubDate>Wed, 07 Jan 2026 00:00:00 GMT</pubDate>
-      <author>L-Pig</author>
-      <description>使用Golang实现枚举类型</description>
-      <enclosure url="https://blog.l-pig.cn/_astro/go-enum.B_idjXMN.png" type="image/jpeg" />
-      <category>Golang</category>
-    </item>
-
-    <item>
       <title>Kafka安装、部署、测试</title>
       <link>https://blog.l-pig.cn/blog/kafka-install/</link>
       <guid isPermaLink="true">https://blog.l-pig.cn/blog/kafka-install/</guid>
@@ -135,10 +124,21 @@
     </item>
 
     <item>
+      <title>Go实现枚举</title>
+      <link>https://blog.l-pig.cn/blog/go-enum/</link>
+      <guid isPermaLink="true">https://blog.l-pig.cn/blog/go-enum/</guid>
+      <pubDate>Wed, 07 Jan 2026 00:00:00 GMT</pubDate>
+      <author>L-Pig</author>
+      <description>使用Golang实现枚举类型</description>
+      <enclosure url="https://blog.l-pig.cn/_astro/go-enum.B_idjXMN.png" type="image/jpeg" />
+      <category>Golang</category>
+    </item>
+
+    <item>
       <title>博客</title>
       <link>https://blog.l-pig.cn/blog/-index/</link>
       <guid isPermaLink="true">https://blog.l-pig.cn/blog/-index/</guid>
-      <pubDate>Wed, 18 Feb 2026 05:03:33 GMT</pubDate>
+      <pubDate>Wed, 18 Feb 2026 05:06:36 GMT</pubDate>
       <author>L-Pig</author>
       <description>记录 L-Pig 写的文章</description>
       
